@@ -1,17 +1,14 @@
 import Image from "next/image";
-import Base from "../components/Home.js";
+import Directory from "../components/Directory.js";
+import { redirect } from 'next/navigation';
 
 export const metadata = {
-  title: "Streetwear PopUp - Home",
+  title: "Streetwear PopUp",
   description: "Discover the latest streetwear fashion",
 };
 
 export default function Home() {
+  
+  redirect('/home');
 
-  return(
-    <div>
-      <Base />
-    </div>
-
-  );
 }
