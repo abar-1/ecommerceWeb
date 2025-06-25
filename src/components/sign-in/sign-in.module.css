@@ -52,10 +52,11 @@
     border-color: #5c6ac4;
     box-shadow: 0 0 0 3px rgba(92, 106, 196, 0.2);
   }
-.signInLink {
-  color: rgb(47, 47, 211);
-}
   
+.signUpLink {
+  color: rgb(47, 47, 211);
+
+}  
 .submitButton {
     background-color: #5c6ac4;
     color: white;
@@ -98,6 +99,8 @@
 .googleButton:hover .googleIcon {
   transform: rotate(360deg);
 }
+
+
   
   /* Animations */
 @keyframes fadeIn {

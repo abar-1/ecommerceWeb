@@ -1,11 +1,10 @@
-import SigninPage from "../../components/Signin.js";
+"use client";
+import SignInPage from '@/components/sign-in/sign-in.js';
 
-export default function Signin() {
+
+export default function SignIn() {
+
     return(
-
-        <div>
-            <SigninPage />
-        </div>
+        <SignInPage />
     );
-    
 }
