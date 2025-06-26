@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect} from 'react';
 import Image from 'next/image';
 import styles from './sign-up-form.module.css';
 import { auth, createAuthUserWithEmailAndPassword, createUserDocumentFromAuth, signInWithGooglePopup } from '@/utils/firebase/firebase.utils';
@@ -15,20 +15,7 @@ const defaultFormFields = {
 
 export default function SignUpForm() {
     const [formFields, setFormFields] = useState(defaultFormFields);
-    const { displayName, email, password, confirmPassword } = formFields
-    
-    useEffect(() => {
-        console.log(formFields);
-    },[formFields])
-    
-
-    const logGoogleUser = async () => {
-        console.log("🧪 Signing in with Google Popup...");
-        const { user } = await signInWithGooglePopup();
-        console.log("✅ Popup sign-in successful:", user);
-        await createUserDocumentFromAuth(user);
-      };
-
+    const { displayName, email, password, confirmPassword } = formFields;
 
     const resetFormFields = () => {
         setFormFields(defaultFormFields);
@@ -42,10 +29,12 @@ export default function SignUpForm() {
             return;
         }
         try{
-            console.log("Signing in with", email);
-            const userCredential = await createAuthUserWithEmailAndPassword(email, password);
+            const { user } = await createAuthUserWithEmailAndPassword(email, password);
+            
+            setCurrentUser(user);
+
+            await createUserDocumentFromAuth(user, { displayName });
             resetFormFields();
-            console.log('User created successfully:', userCredential.user);
             return userCredential;
             
         }catch(error){
@@ -54,7 +43,6 @@ export default function SignUpForm() {
             }
             console.log("Error creating user: ", error);
         }
-        
     }
 
     const handleChange = (event) => {

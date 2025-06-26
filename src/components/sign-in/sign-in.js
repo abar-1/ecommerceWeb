@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { signInWithGooglePopup, signInAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from '@/utils/firebase/firebase.utils';
 import { useState } from 'react';
 
+
 const defaultFormFields = {
     email: '',
     password: ''
@@ -13,7 +14,7 @@ export default function SignIn() {
     const [formFields, setFormFields] = useState(defaultFormFields);
     const {email, password } = formFields;
     
-    console.log(formFields);
+
 
     const resetFormFields = () => {
         setFormFields(defaultFormFields);
@@ -27,12 +28,11 @@ export default function SignIn() {
     
     const handleSubmit = async (event) => {
         event.preventDefault(); //No default behavior
-
         
         try{
-           const response = await signInAuthUserWithEmailAndPassword(email, password);
+           const { user } = await signInAuthUserWithEmailAndPassword(email, password);
            resetFormFields();
-           console.log(response);
+          
             
         }catch(error){
             if (error === 'auth/wrong-password'){
@@ -47,7 +47,6 @@ export default function SignIn() {
 
     const signInWithGoogle = async () => {
         const { user } = await signInWithGooglePopup();
-        await createUserDocumentFromAuth(user);
         resetFormFields();
     }
     return(

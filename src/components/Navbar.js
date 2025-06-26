@@ -1,13 +1,23 @@
+"use client";
 import Link from "next/link";
 import styles from "./Navbar.module.css";
 import Image from "next/image";
+import { useContext } from 'react';
+import { signOutUser } from "@/utils/firebase/firebase.utils";
+
+import { UserContext } from "@/contexts/users.context";
+import { signOut } from "firebase/auth";
 
 export default function Navbar() {
+
+  const { currentUser } = useContext(UserContext);
+
+ 
   return (
     <nav className={styles.navbar}>
       <div className={styles.navContainer}>
         <Link href="/home" className={styles.logo}>
-          <Image 
+          <Image  
             src="/house.png"
             width={30}
             height={30}
@@ -21,9 +31,14 @@ export default function Navbar() {
           <Link href="/contact" className={styles.link}>
             Contact Us
           </Link>
-          <Link href="/signin" className={styles.link}>
-            Sign In
-          </Link>
+            {
+              currentUser ? (
+                <span className={styles.link} href='/signin' onClick={signOutUser}> Sign Out </span>
+              ) : (
+                <Link className={styles.link} href='/signin'> Sign in </Link>                 
+              )
+            }
+        
         </div>
       </div>
     </nav>
