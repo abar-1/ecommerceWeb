@@ -1,0 +1,125 @@
+.card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08), 0 1.5px 6px rgba(0,0,0,0.06);
+  padding: 20px;
+  transition: box-shadow 0.2s, transform 0.2s;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  overflow: hidden;
+  padding-bottom: 55px;
+}
+
+.swiper-pagination-bullet {
+  background-color: #cccccc !important; /* Inactive bullet color */
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #ff0000 !important; /* Active bullet color */
+}
+
+.card:hover {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.16), 0 3px 12px rgba(0,0,0,0.12);
+  transform: translateY(-4px) scale(1.02);
+}
+
+.picture {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5;
+  border-radius: 12px;
+  overflow: hidden;
+  user-select: none;
+}
+
+.productImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 12px;
+}
+
+.details {
+  margin-top: 8px;
+  text-align: center;
+  flex-grow: 1;
+  overflow-wrap: break-word;
+
+}
+
+.name {
+  overflow-wrap: break-word;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  user-select: none;
+}
+
+.price {
+  font-size: 1rem;
+  color: #2d8f5a;
+  font-weight: 500;
+  user-select: none;
+}
+
+.addToCart {
+  display: none;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #2d8f5a;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(45,143,90,0.12);
+  transition: background 0.2s, box-shadow 0.2s;
+  z-index: 2;
+}
+
+.card:hover .addToCart {
+  display: block;
+}
+
+.cardGrid {
+  display: flex;
+  
+  padding: 32px 0;
+  flex-direction: row;
+  
+  justify-content: center;
+  
+}
+
+:global(.swiper-wrapper) {
+  align-items: stretch;
+}
+
+:global(.swiper-slide) {
+  display: flex;
+  align-items: stretch;
+  height: auto;
+}
+
+:global(.swiper-slide > div) {
+  display: flex;
+  flex: 1;
+}
+
+.details {
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

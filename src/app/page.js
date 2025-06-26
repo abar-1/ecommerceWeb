@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Directory from "../components/Directory.js";
+
 import { redirect } from 'next/navigation';
 
 export const metadata = {

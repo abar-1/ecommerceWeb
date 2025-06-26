@@ -8,6 +8,8 @@ import { signOutUser } from "@/utils/firebase/firebase.utils";
 import { UserContext } from "@/contexts/users.context";
 import { signOut } from "firebase/auth";
 
+import CartIcon from "../cartIcon/cartIcon.component";
+
 export default function Navbar() {
 
   const { currentUser } = useContext(UserContext);
@@ -38,7 +40,7 @@ export default function Navbar() {
                 <Link className={styles.link} href='/signin'> Sign in </Link>                 
               )
             }
-        
+          <CartIcon />
         </div>
       </div>
     </nav>

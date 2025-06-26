@@ -1,4 +1,4 @@
-import Directory from "../../components/Directory.js";
+import Directory from "../../components/homePage/Directory.js";
 
 export default function Home() {
 

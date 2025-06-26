@@ -14,10 +14,12 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.6.2",
-    "sass": "^1.89.2"
+    "sass": "^1.89.2",
+    "swiper": "^11.2.8"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@svgr/webpack": "^8.1.0",
     "eslint": "^9",
     "eslint-config-next": "15.3.3"
   }
