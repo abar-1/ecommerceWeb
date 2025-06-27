@@ -4,12 +4,14 @@
   display: grid;
   height: 90vh;
   width: 100vw;
-  gap: 10px;
+  gap: 12px;
   padding: 10px;
   box-sizing: border-box;
   background-color: #000;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: repeat(6, 1fr);
+  user-select: none;
+  padding: 10px 10px;
 }
 
 /* Base card style */
@@ -72,6 +74,12 @@
   border-radius: 12px;
   z-index: 1;
   transition: transform 0.3s ease-in-out;
+}
+.text {
+  font-size: 3.5rem;
+  font-weight: bold;
+  user-select: none;
+
 }
 
 .logoSlot:hover {

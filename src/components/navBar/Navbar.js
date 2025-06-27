@@ -9,12 +9,13 @@ import { UserContext } from "@/contexts/users.context";
 import { signOut } from "firebase/auth";
 
 import CartIcon from "../cartIcon/cartIcon.component";
+import CartDropdown from "../cartDropdown/cartDropdown.component";
+import { CartContext } from "@/contexts/cart.context";
 
 export default function Navbar() {
 
   const { currentUser } = useContext(UserContext);
-
- 
+  const { isCartOpen } = useContext(CartContext);
   return (
     <nav className={styles.navbar}>
       <div className={styles.navContainer}>
@@ -42,6 +43,7 @@ export default function Navbar() {
             }
           <CartIcon />
         </div>
+        { isCartOpen && <CartDropdown />}
       </div>
     </nav>
   );

@@ -32,10 +32,6 @@
     transition: filter 0.2s;
 }
 
-.cartIconContainer:hover .shoppingIcon {
-    filter: brightness(0) saturate(100%) invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(97%);
-}
-
 .itemCount {
     position: absolute;
     font-size: 10px;
