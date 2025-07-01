@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styles from "./Category.module.css";
 
 export default function Category({ category, index, imageUrl, subtitle, link }) {
@@ -11,10 +12,10 @@ export default function Category({ category, index, imageUrl, subtitle, link }) 
         backgroundPosition: "center",
       }}
     >
-      <a href={link} className={styles.content}>
+      <Link href={link} className={styles.content}>
         <h2>{category}</h2>
         <p>{subtitle}</p>
-      </a>
+      </Link>
     </div>
   );
 }
