@@ -1,7 +1,7 @@
 .cartDropdownContainer {
     position: absolute;
-    width: 240px;
-    height: 340px;
+    width: 300px;
+    height: 400px;
     display: flex;
     flex-direction: column;
     padding: 20px;
@@ -10,6 +10,18 @@
     top: 90px;
     right: 40px;
     z-index: 5;
+    animation: slideDown 0.6s ease-in-out;
+}
+
+@keyframes slideDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .emptyMessage {
@@ -18,10 +30,12 @@
 }
 
 .cartItems {
-    height: 240px;
+    flex: 1;
     display: flex;
     flex-direction: column;
     overflow: auto;
+    width: 100%;
+    padding-right: 5px; /* Account for scrollbar space */
 }
 
 .goToCheckout {

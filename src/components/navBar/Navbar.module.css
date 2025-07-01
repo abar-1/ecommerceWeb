@@ -2,13 +2,16 @@
   background: linear-gradient(90deg, #f8fafc 0%, #e0e7ef 100%);
   color: #111;
   height: 8vh;
-  padding: 0 2rem;
+  padding: 0rem 2rem;
   box-shadow: 0 4px 16px rgba(0,0,0,0.10);
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 100;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
   border-radius: 0 0 16px 16px;
   transition: box-shadow 0.3s;
+  margin-bottom: 64px;
 }
 
 .navbar:hover {
