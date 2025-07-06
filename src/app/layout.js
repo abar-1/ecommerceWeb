@@ -3,8 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/navBar/Navbar";
 
-import { CategoriesProvider } from "@/contexts/categories.context";
-import { UserProvider } from "@/contexts/users.context";
 import { CartProvider } from "@/contexts/cart.context";
 import { Provider } from "react-redux";
 import { store } from '@/store/store';

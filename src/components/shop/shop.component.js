@@ -1,37 +1,37 @@
 "use client";
 import SHOP_DATA from '@/shop-data.json';
-import { Fragment, useContext } from 'react';
-import { CategoriesContext } from '@/contexts/categories.context';
+import { Fragment, useEffect } from 'react';
+import { getCategoriesAndDocuments } from '@/utils/firebase/firebase.utils';
+import { setCategoriesMap } from '@/store/categories/categories.action';
+import { useSelector, useDispatch } from 'react-redux';
+
 import ProductCard from './productCard.component';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, A11y } from 'swiper/modules';
+
+import { selectCategoriesMap } from '@/store/categories/categories.selector';
 
 import styles from "./shop.module.css";
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-function groupByType(products) {
-    return products.reduce((acc, product) => {
-        const type = product.type || 'other';
-        if (!acc[type]) acc[type] = [];
-        acc[type].push(product);
-        return acc;
-    }, {});
-}
-
-const typeDisplayNames = {
-    "graphic-tee": "Graphic Tees",
-    "pants": "Pants",
-    "pullovers": "Pullovers",
-    "shorts": "Shorts",
-    "shoes": "Shoes"
-}
-
 export default function Shop() {
-    const { categoriesMap } = useContext(CategoriesContext);
 
+    const dispatch = useDispatch();
 
+    const categoriesMap = useSelector(selectCategoriesMap);
+
+    useEffect(() => {
+        const getCategoriesMap = async () => {
+            const categoryMap = await getCategoriesAndDocuments();
+            console.log(categoryMap);
+
+            dispatch(setCategoriesMap(categoryMap));
+        }
+
+        getCategoriesMap();
+    }, [dispatch])
 
     return (
         <div className={styles.container}>

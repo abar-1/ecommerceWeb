@@ -6,12 +6,14 @@ import { useSelector } from 'react-redux';
 import { signOutUser } from "@/utils/firebase/firebase.utils";
 import { useContext } from 'react';
 
+import { selectCurrentUser } from '@/store/user/user.selector'
+
 import CartIcon from "../cartIcon/cartIcon.component";
 import CartDropdown from "../cartDropdown/cartDropdown.component";
 import { CartContext } from "@/contexts/cart.context";
 
 export default function Navbar() {
-  const currentUser = useSelector((state) => state.user.currentUser);
+  const currentUser = useSelector(selectCurrentUser);
   const { isCartOpen } = useContext(CartContext);
   
   return (
