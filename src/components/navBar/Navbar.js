@@ -2,24 +2,22 @@
 import Link from "next/link";
 import styles from "./Navbar.module.css";
 import Image from "next/image";
-import { useContext } from 'react';
+import { useSelector } from 'react-redux';
 import { signOutUser } from "@/utils/firebase/firebase.utils";
-
-import { UserContext } from "@/contexts/users.context";
-import { signOut } from "firebase/auth";
+import { useContext } from 'react';
 
 import CartIcon from "../cartIcon/cartIcon.component";
 import CartDropdown from "../cartDropdown/cartDropdown.component";
 import { CartContext } from "@/contexts/cart.context";
 
 export default function Navbar() {
-
-  const { currentUser } = useContext(UserContext);
+  const currentUser = useSelector((state) => state.user.currentUser);
   const { isCartOpen } = useContext(CartContext);
+  
   return (
     <nav className={styles.navbar}>
       <div className={styles.navContainer}>
-        <Link href="/home" className={styles.logo}>
+        <Link href="/" className={styles.logo}>
           <Image  
             src="/house.png"
             width={30}

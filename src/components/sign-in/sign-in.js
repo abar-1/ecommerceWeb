@@ -2,7 +2,8 @@ import styles from './sign-in.module.css';
 import Image from 'next/image';
 import { signInWithGooglePopup, signInAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from '@/utils/firebase/firebase.utils';
 import { useState } from 'react';
-
+import { useDispatch } from 'react-redux';
+import { setCurrentUser } from '@/store/user/user.action';
 
 const defaultFormFields = {
     email: '',
@@ -10,11 +11,9 @@ const defaultFormFields = {
 }
 
 export default function SignIn() {
-
     const [formFields, setFormFields] = useState(defaultFormFields);
     const {email, password } = formFields;
-    
-
+    const dispatch = useDispatch();
 
     const resetFormFields = () => {
         setFormFields(defaultFormFields);
@@ -22,35 +21,33 @@ export default function SignIn() {
 
     const handleChange = (event) => {
         const {name, value} = event.target;
-
-        setFormFields({...formFields, [name]: value}); //updating formFields
+        setFormFields({...formFields, [name]: value});
     }
     
     const handleSubmit = async (event) => {
-        event.preventDefault(); //No default behavior
+        event.preventDefault();
         
         try{
            const { user } = await signInAuthUserWithEmailAndPassword(email, password);
+           dispatch(setCurrentUser(user));
            resetFormFields();
-          
-            
         }catch(error){
-            if (error === 'auth/wrong-password'){
+            if (error.code === 'auth/wrong-password'){
                 alert("Incorrect Password");
             }
-            else if( error === 'auth/user-not-found'){
+            else if( error.code === 'auth/user-not-found'){
                 alert("Email not found");
             }
-            }
         }   
-    
+    }
 
     const signInWithGoogle = async () => {
         const { user } = await signInWithGooglePopup();
+        dispatch(setCurrentUser(user));
         resetFormFields();
     }
-    return(
 
+    return(
         <div className={styles.formContainer}>
             <form className={styles.form} onSubmit={handleSubmit}>
                 <h1 className={styles.formHeader}>Sign In</h1>
