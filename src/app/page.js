@@ -1,9 +1,9 @@
 "use client";
 
 import { useDispatch } from "react-redux";
+import { useEffect} from 'react';
 import { onAuthStateChangedListener, createUserDocumentFromAuth } from '@/utils/firebase/firebase.utils';
 
-import { useEffect} from 'react';
 
 import { setCurrentUser } from "@/store/user/user.action";
 

@@ -5,11 +5,12 @@ import Navbar from "../components/navBar/Navbar";
 
 
 import { Provider } from "react-redux";
-import { store } from '@/store/store';
+import { store, persistor } from '@/store/store';
 import { useEffect } from 'react';
 import { useDispatch } from "react-redux";
 import { onAuthStateChangedListener, createUserDocumentFromAuth } from '@/utils/firebase/firebase.utils';
 import { setCurrentUser } from "@/store/user/user.action";
+import { PersistGate } from 'redux-persist/integration/react';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -54,11 +55,12 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
           <AuthListener />
          
             <Navbar />
             {children}
-         
+            </PersistGate>
         </Provider>
       </body>
     </html>

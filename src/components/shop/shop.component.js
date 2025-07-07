@@ -2,14 +2,17 @@
 import SHOP_DATA from '@/shop-data.json';
 import { Fragment, useEffect } from 'react';
 import { getCategoriesAndDocuments } from '@/utils/firebase/firebase.utils';
-import { setCategories } from '@/store/categories/categories.action';
+import { fetchCategoriesAsync } from '@/store/categories/categories.action';
 import { useSelector, useDispatch } from 'react-redux';
 
 import ProductCard from './productCard.component';
+import Spinner from '@/components/spinner/spinner.component';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, A11y } from 'swiper/modules';
 
-import { selectCategoriesMap } from '@/store/categories/categories.selector';
+
+
+import { selectCategoriesIsLoading, selectCategoriesMap } from '@/store/categories/categories.selector';
 
 import styles from "./shop.module.css";
 import 'swiper/css';
@@ -21,14 +24,10 @@ export default function Shop() {
     const dispatch = useDispatch();
 
     const categoriesMap = useSelector(selectCategoriesMap);
+    const isLoading = useSelector(selectCategoriesIsLoading);
 
     useEffect(() => {
-        const getCategoriesMap = async () => {
-            const categoriesArray = await getCategoriesAndDocuments('categories');
-            dispatch(setCategories(categoriesArray));
-        }
-
-        getCategoriesMap();
+        dispatch(fetchCategoriesAsync());
     }, [dispatch])
 
     return (
@@ -38,6 +37,11 @@ export default function Shop() {
                 <h2 style={{ textAlign: 'center', margin: '32px 0 16px', color: "white", fontSize: "24px", fontWeight: "bold" }}>
                     {title}
                 </h2>
+                {
+
+                    isLoading ? (<Spinner /> ) : ( 
+                
+
                 <Swiper
                     modules={[Navigation, Pagination, A11y]}
                     spaceBetween={20}
@@ -51,7 +55,9 @@ export default function Shop() {
                         </SwiperSlide>
                     ))}
                 </Swiper>
+                  )}
             </section>
+
 
             ))}
                 
