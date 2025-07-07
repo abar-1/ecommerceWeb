@@ -1,15 +1,16 @@
 "use client";
 import styles from './cartIcon.module.css';
-import { useContext } from 'react';
-import { CartContext } from '@/contexts/cart.context';
+import { useDispatch, useSelector } from 'react-redux';
+import { setIsCartOpen } from '@/store/cart/cart.action';
+import { selectIsCartOpen, selectCartCount } from '@/store/cart/cart.selector';
 
 export default function cartIcon() {
+    const dispatch = useDispatch();
+    const isCartOpen = useSelector(selectIsCartOpen);
+    const cartCount = useSelector(selectCartCount);
 
-    const { isCartOpen, setIsCartOpen, cartCount } = useContext(CartContext);
-
-    const toggleIsCartOpen = () => setIsCartOpen(!isCartOpen);
     return(
-        <div className={styles.cartIconContainer} onClick={toggleIsCartOpen}>
+        <div className={styles.cartIconContainer} onClick={() => dispatch(setIsCartOpen(!isCartOpen))}>
             <img src="/shoppingBag.svg" alt="Shopping bag" className={styles.shoppingIcon} />
             <span className={styles.itemCount}>{cartCount}</span>      
         </div>

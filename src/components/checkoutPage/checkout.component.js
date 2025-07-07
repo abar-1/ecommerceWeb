@@ -1,13 +1,14 @@
 "use client";
-import { useContext } from 'react';
-import Image from 'next/image';
 import styles from './checkout.module.css';
-import { CartContext } from '@/contexts/cart.context';
+import { updateItemQuantity, removeItemFromCart } from '@/store/cart/cart.action';
+import {useSelector, useDispatch} from 'react-redux';
+import { selectCartItems } from '@/store/cart/cart.selector';
 
 
 export default function Checkout() {
-
-    const { cartItems, updateItemQuantity, removeItemFromCart } = useContext(CartContext);
+    const cartItems = useSelector(selectCartItems);
+    const dispatch = useDispatch();
+ 
 
     const total = cartItems.reduce(
         (sum, item) => sum + item.price * item.quantity,
@@ -26,10 +27,10 @@ export default function Checkout() {
                         <div className={styles.details}>
                             <h2>{item.name}</h2>
                             <div className={styles.quantityContainer}>
-                                <button onClick={() => updateItemQuantity(item.id, item.quantity - 1)} className={styles.changeQuant}>-</button>
+                                <button onClick={() => dispatch(updateItemQuantity(item.id, item.quantity - 1))} className={styles.changeQuant}>-</button>
                                 <span>{item.quantity}</span>
-                                <button onClick={() => updateItemQuantity(item.id, item.quantity + 1)} className={styles.changeQuant}>+</button>
-                                <button onClick={() => removeItemFromCart(item.id)} className={styles.removeButton}>Remove From Cart</button>
+                                <button onClick={() => dispatch(updateItemQuantity(item.id, item.quantity + 1))} className={styles.changeQuant}>+</button>
+                                <button onClick={() => dispatch(removeItemFromCart(item.id))} className={styles.removeButton}>Remove From Cart</button>
                             </div>
                             <div className={styles.price}>
                                 <h3>${(item.price * item.quantity).toFixed(2)}</h3>

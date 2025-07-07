@@ -2,7 +2,7 @@
 import SHOP_DATA from '@/shop-data.json';
 import { Fragment, useEffect } from 'react';
 import { getCategoriesAndDocuments } from '@/utils/firebase/firebase.utils';
-import { setCategoriesMap } from '@/store/categories/categories.action';
+import { setCategories } from '@/store/categories/categories.action';
 import { useSelector, useDispatch } from 'react-redux';
 
 import ProductCard from './productCard.component';
@@ -24,10 +24,8 @@ export default function Shop() {
 
     useEffect(() => {
         const getCategoriesMap = async () => {
-            const categoryMap = await getCategoriesAndDocuments();
-            console.log(categoryMap);
-
-            dispatch(setCategoriesMap(categoryMap));
+            const categoriesArray = await getCategoriesAndDocuments('categories');
+            dispatch(setCategories(categoriesArray));
         }
 
         getCategoriesMap();

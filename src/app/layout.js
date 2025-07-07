@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/navBar/Navbar";
 
-import { CartProvider } from "@/contexts/cart.context";
+
 import { Provider } from "react-redux";
 import { store } from '@/store/store';
 import { useEffect } from 'react';
@@ -55,10 +55,10 @@ export default function RootLayout({ children }) {
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Provider store={store}>
           <AuthListener />
-          <CartProvider>
+         
             <Navbar />
             {children}
-          </CartProvider>
+         
         </Provider>
       </body>
     </html>

@@ -1,14 +1,12 @@
 import styles from './cartDropdown.module.css';
 import CartItem from '../cartItem/cartItem.component';
-import {useContext} from 'react';
-import { CartContext } from '@/contexts/cart.context';
+import { useSelector } from 'react-redux';
+import { selectCartItems } from '@/store/cart/cart.selector';
 import Link from 'next/link';
 
 export default function cartDropdown() {
-
-    const {cartItems} = useContext(CartContext);
+    const cartItems = useSelector(selectCartItems);
     return(
-
         <div className={styles.cartDropdownContainer}>
             <div className={styles.cartItems}>
                 {cartItems.map((item) => (
@@ -18,7 +16,6 @@ export default function cartDropdown() {
             <Link href="/checkout" className={styles.goToCheckoutLink}>
                 <button className={styles.goToCheckout}>Go to checkout</button>
             </Link>
-
         </div>
     );
 }

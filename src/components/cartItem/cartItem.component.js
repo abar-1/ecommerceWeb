@@ -1,23 +1,22 @@
 import styles from './cartItem.module.css';
-import { useContext } from 'react';
-import { CartContext } from '@/contexts/cart.context'
+import { useDispatch } from 'react-redux';
+import { updateItemQuantity, removeItemFromCart } from '@/store/cart/cart.action';
 
 export default function cartItem({ cartItem }) {
-
-    const{ name, quantity, imageUrl, price, id } = cartItem;
-    const { updateItemQuantity, removeItemFromCart } = useContext(CartContext);
+    const dispatch = useDispatch();
+    const { name, quantity, imageUrl, price, id } = cartItem;
 
     const addQuantity = () => {
-        updateItemQuantity(id, quantity + 1);
-    }
+        dispatch(updateItemQuantity(id, quantity + 1));
+    };
 
     const reduceQuantity = () => {
-        updateItemQuantity(id, quantity - 1);
-    }
+        dispatch(updateItemQuantity(id, quantity - 1));
+    };
 
     const removeItem = () => {
-        removeItemFromCart(id);
-    }
+        dispatch(removeItemFromCart(id));
+    };
 
     return(
         <div className={styles.cartItemContainer}>
@@ -35,6 +34,5 @@ export default function cartItem({ cartItem }) {
                 <button className={styles.removeButton} onClick={removeItem}>Remove</button>
             </div>
         </div>
-
     );
 }
