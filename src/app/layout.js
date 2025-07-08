@@ -8,8 +8,8 @@ import { Provider } from "react-redux";
 import { store, persistor } from '@/store/store';
 import { useEffect } from 'react';
 import { useDispatch } from "react-redux";
-import { onAuthStateChangedListener, createUserDocumentFromAuth } from '@/utils/firebase/firebase.utils';
-import { setCurrentUser } from "@/store/user/user.action";
+
+import { checkUserSession, setCurrentUser } from "@/store/user/user.action";
 import { PersistGate } from 'redux-persist/integration/react';
 
 const geistSans = Geist({
@@ -31,20 +31,7 @@ function AuthListener() {
   const dispatch = useDispatch();
   
   useEffect(() => {
-    console.log('AuthListener useEffect running - setting up auth listener');
-    
-    const unsubscribe = onAuthStateChangedListener((user) => {
-        console.log('Auth state changed:', user);
-        if(user){
-            console.log('User found, creating document');
-            createUserDocumentFromAuth(user);
-        }
-        console.log('Dispatching setCurrentUser:', user);
-        dispatch(setCurrentUser(user));
-    });
-    
-    console.log('Auth listener set up, returning unsubscribe function');
-    return unsubscribe;
+    dispatch(checkUserSession());
   }, [dispatch])
 
   return null;

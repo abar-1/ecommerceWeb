@@ -1,8 +1,7 @@
 "use client";
-import SHOP_DATA from '@/shop-data.json';
-import { Fragment, useEffect } from 'react';
-import { getCategoriesAndDocuments } from '@/utils/firebase/firebase.utils';
-import { fetchCategoriesAsync } from '@/store/categories/categories.action';
+import { useEffect } from 'react';
+
+import { fetchCategoriesStart } from '@/store/categories/categories.action';
 import { useSelector, useDispatch } from 'react-redux';
 
 import ProductCard from './productCard.component';
@@ -27,7 +26,7 @@ export default function Shop() {
     const isLoading = useSelector(selectCategoriesIsLoading);
 
     useEffect(() => {
-        dispatch(fetchCategoriesAsync());
+        dispatch(fetchCategoriesStart());
     }, [dispatch])
 
     return (

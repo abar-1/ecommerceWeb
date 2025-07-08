@@ -3,13 +3,13 @@ import Link from "next/link";
 import styles from "./Navbar.module.css";
 import Image from "next/image";
 import { useSelector, useDispatch } from 'react-redux';
-import { signOutUser } from "@/utils/firebase/firebase.utils";
-import { setIsCartOpen } from "@/store/cart/cart.action";
 
+import { signOutStart } from "@/store/user/user.action";
 import { selectCurrentUser } from '@/store/user/user.selector'
 
 import CartIcon from "../cartIcon/cartIcon.component";
 import CartDropdown from "../cartDropdown/cartDropdown.component";
+import { signOut } from "firebase/auth";
 
 
 export default function Navbar() {
@@ -17,6 +17,7 @@ export default function Navbar() {
   const dispatch = useDispatch();
   const isCartOpen = useSelector(state => state.cart.isCartOpen);
 
+  const signOutUser = () => dispatch(signOutStart());
   
   return (
     <nav className={styles.navbar}>

@@ -1,7 +1,9 @@
-import { useState, useEffect} from 'react';
-import Image from 'next/image';
+"use client";
+import { useState} from 'react';
+import { useDispatch} from 'react-redux';
+import { signUpStart } from '@/store/user/user.action';
 import styles from './sign-up-form.module.css';
-import { auth, createAuthUserWithEmailAndPassword, createUserDocumentFromAuth, signInWithGooglePopup } from '@/utils/firebase/firebase.utils';
+import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from '@/utils/firebase/firebase.utils';
 
 
 
@@ -14,6 +16,7 @@ const defaultFormFields = {
 }
 
 export default function SignUpForm() {
+    const dispatch = useDispatch();
     const [formFields, setFormFields] = useState(defaultFormFields);
     const { displayName, email, password, confirmPassword } = formFields;
 
@@ -29,13 +32,9 @@ export default function SignUpForm() {
             return;
         }
         try{
-            const { user } = await createAuthUserWithEmailAndPassword(email, password);
-            
-            setCurrentUser(user);
-
-            await createUserDocumentFromAuth(user, { displayName });
+            dispatch(signUpStart(email, password, displayName));
+           
             resetFormFields();
-            return userCredential;
             
         }catch(error){
             if (error.code === 'auth/email-already-in-use'){

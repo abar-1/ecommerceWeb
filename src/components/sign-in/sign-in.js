@@ -1,9 +1,10 @@
 import styles from './sign-in.module.css';
 import Image from 'next/image';
-import { signInWithGooglePopup, signInAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from '@/utils/firebase/firebase.utils';
+
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { setCurrentUser } from '@/store/user/user.action';
+
+import { googleSignInStart, emailSignInStart } from '@/store/user/user.action';
 
 const defaultFormFields = {
     email: '',
@@ -28,8 +29,7 @@ export default function SignIn() {
         event.preventDefault();
         
         try{
-           const { user } = await signInAuthUserWithEmailAndPassword(email, password);
-           dispatch(setCurrentUser(user));
+           dispatch(emailSignInStart(email, password));
            resetFormFields();
         }catch(error){
             if (error.code === 'auth/wrong-password'){
@@ -42,8 +42,7 @@ export default function SignIn() {
     }
 
     const signInWithGoogle = async () => {
-        const { user } = await signInWithGooglePopup();
-        dispatch(setCurrentUser(user));
+        dispatch(googleSignInStart());
         resetFormFields();
     }
 
