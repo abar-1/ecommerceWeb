@@ -1,13 +1,16 @@
 "use client";
+import { useState } from 'react';
 import styles from './checkout.module.css';
 import { updateItemQuantity, removeItemFromCart } from '@/store/cart/cart.action';
 import {useSelector, useDispatch} from 'react-redux';
 import { selectCartItems } from '@/store/cart/cart.selector';
+import PaymentForm from '../paymentForm/paymentForm.component';
 
 
 export default function Checkout() {
     const cartItems = useSelector(selectCartItems);
     const dispatch = useDispatch();
+    const [clicked, setClicked] = useState(false);
  
 
     const total = cartItems.reduce(
@@ -17,7 +20,7 @@ export default function Checkout() {
 
     return(
 
-        <div> 
+        <div className={styles.container}> 
             <div className={styles.cartItemContainer}>
                 {cartItems.map((item, idx) => (
                     <div key={item.id || idx}>
@@ -45,10 +48,18 @@ export default function Checkout() {
                     <h2>Total: ${total.toFixed(2)}</h2>
                 </div>
                 <div className={styles.payButton}>
-                    <button> Pay Now</button>
+                    <button className={styles.checkout} onClick={() => setClicked(true)}>Checkout</button>
+                    {clicked && (
+                        <button className={styles.cancelButton} onClick={() => setClicked(false)}> Cancel </button>
+                    )}
                 </div>
 
             </div>
+            {clicked && (
+                <div className={styles.paymentFormWrapper}>
+                    <PaymentForm />
+                </div>
+            )}
         </div>
     );
 }

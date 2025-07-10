@@ -1,0 +1,71 @@
+.paymentFormContainer {
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #18181b;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+    padding: 32px 24px;
+    margin: 24px auto;
+    max-width: 420px;
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    min-width: 320px;
+    width: 100%;
+}
+
+/* Style the CardElement area */
+.formContainer :global(.StripeElement) {
+    background: #23272f;
+    padding: 14px 16px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    color: #fff;
+    font-size: 1rem;
+    margin-bottom: 12px;
+}
+
+.formContainer button {
+    background: linear-gradient(90deg, #6366f1 0%, #60a5fa 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    box-shadow: 0 2px 8px rgba(99,102,241,0.08);
+}
+
+.formContainer button:hover {
+    background: linear-gradient(90deg, #60a5fa 0%, #6366f1 100%);
+}
+
+.spinner {
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #6366f1;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg);}
+  100% { transform: rotate(360deg);}
+}
+
+.payDisabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

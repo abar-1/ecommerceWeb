@@ -1,6 +1,8 @@
 "use client";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Elements } from "@stripe/react-stripe-js";
+
 import Navbar from "../components/navBar/Navbar";
 
 
@@ -11,6 +13,7 @@ import { useDispatch } from "react-redux";
 
 import { checkUserSession, setCurrentUser } from "@/store/user/user.action";
 import { PersistGate } from 'redux-persist/integration/react';
+import { stripePromise } from "@/utils/stripe/stripe.utils";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,13 +43,17 @@ function AuthListener() {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <title>Men's Clothing Shop</title>
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
           <AuthListener />
-         
             <Navbar />
+            <Elements stripe={stripePromise}>
             {children}
+            </Elements>
             </PersistGate>
         </Provider>
       </body>

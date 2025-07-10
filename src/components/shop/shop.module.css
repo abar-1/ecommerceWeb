@@ -102,17 +102,17 @@
   
 }
 
-:global(.swiper-wrapper) {
+.cardGrid :global(.swiper-wrapper) {
   align-items: stretch;
 }
 
-:global(.swiper-slide) {
+.cardGrid :global(.swiper-slide) {
   display: flex;
   align-items: stretch;
   height: auto;
 }
 
-:global(.swiper-slide > div) {
+.cardGrid :global(.swiper-slide > div) {
   display: flex;
   flex: 1;
 }
