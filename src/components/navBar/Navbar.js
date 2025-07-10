@@ -34,9 +34,6 @@ export default function Navbar() {
           <Link href="/shop" className={styles.link}>
             Shop
           </Link>
-          <Link href="/contact" className={styles.link}>
-            Contact Us
-          </Link>
             {
               currentUser ? (
                 <span className={styles.link} href='/signin' onClick={signOutUser}> Sign Out </span>
