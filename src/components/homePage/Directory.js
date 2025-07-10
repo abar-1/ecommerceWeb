@@ -17,7 +17,7 @@ export default function Directory() {
                 <Category category={title} index={idx} imageUrl={imageUrl} subtitle={sub} key={idx} link={link}/>
             ))}
             <div className={styles.logoSlot}>
-                <h1 className={styles.text}>Men's Clothing<br />PopUp</h1>
+                <h1 className={styles.text}>Men&apos;s Clothing<br />PopUp</h1>
             </div>
         </div>
     );
