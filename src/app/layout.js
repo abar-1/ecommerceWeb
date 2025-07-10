@@ -44,7 +44,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <title>Men's Clothing Shop</title>
+        <title>Men&apos;s Clothing Shop</title>
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Provider store={store}>

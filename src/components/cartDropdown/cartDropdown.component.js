@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { selectCartItems } from '@/store/cart/cart.selector';
 import Link from 'next/link';
 
-export default function cartDropdown() {
+export default function CartDropdown() {
     const cartItems = useSelector(selectCartItems);
     return(
         <div className={styles.cartDropdownContainer}>

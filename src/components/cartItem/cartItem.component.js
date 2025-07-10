@@ -2,7 +2,7 @@ import styles from './cartItem.module.css';
 import { useDispatch } from 'react-redux';
 import { updateItemQuantity, removeItemFromCart } from '@/store/cart/cart.action';
 
-export default function cartItem({ cartItem }) {
+export default function CartItem({ cartItem }) {
     const dispatch = useDispatch();
     const { name, quantity, imageUrl, price, id } = cartItem;
 
